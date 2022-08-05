@@ -3,20 +3,26 @@ package DB::Schema::ResultSet::ProblemSet;
 use strict;
 use warnings;
 use feature 'signatures';
-no warnings qw(experimental::signatures);
+no warnings qw/experimental::signatures/;
 
 use base 'DBIx::Class::ResultSet';
 
-use Carp;
 use Clone qw/clone/;
 
 use DB::Utils qw/getCourseInfo getUserInfo getSetInfo updateAllFields/;
 
-our $SET_TYPES = {
+my $SET_TYPES = {
 	'HW'     => 1,
 	'QUIZ'   => 2,
 	'JITAR'  => 3,
 	'REVIEW' => 4,
+};
+
+my $SUBCLASS_NAMES = {
+	1 => 'HWSet',
+	2 => 'Quiz',
+	3 => 'JITAR',
+	4 => 'ReviewSet'
 };
 
 use DB::Exception;
@@ -358,8 +364,8 @@ sub addProblemSet {
 
 	# Check that fields/dates/parameters are valid
 	my $set_obj = $self->new($set_params);
-	$set_obj->validDates('set_dates');
-	$set_obj->validParams('set_params');
+	$set_obj->validate(field_name => 'set_dates');
+	$set_obj->validate(field_name => 'set_params');
 
 	my $new_set = $course->add_to_problem_sets($set_params);
 
@@ -471,8 +477,8 @@ sub updateProblemSet ($self, %args) {
 	my $set_obj = $self->new($params2);
 
 	# Check the parameters are valid.
-	$set_obj->validDates('set_dates')   if $set_obj->set_dates;
-	$set_obj->validParams('set_params') if $set_obj->set_params;
+	$set_obj->validate(field_name => 'set_dates')  if $set_obj->set_dates;
+	$set_obj->validate(field_name => 'set_params') if $set_obj->set_params;
 	my $updated_set = $problem_set->update({ $set_obj->get_inflated_columns });
 	return $updated_set if $args{as_result_set};
 	my $set = { $updated_set->get_inflated_columns, set_type => $updated_set->set_type };

@@ -1,8 +1,10 @@
 package DB::Schema::Result::UserSet;
-use base qw(DBIx::Class::Core DB::WithParams DB::WithDates);
+use base qw(DBIx::Class::Core DB::Validation);
 
 use strict;
 use warnings;
+use feature 'signatures';
+no warnings qw/experimental::signatures/;
 
 =head1 DESCRIPTION
 
@@ -114,6 +116,7 @@ __PACKAGE__->belongs_to(
 __PACKAGE__->belongs_to(problem_set => 'DB::Schema::Result::ProblemSet', 'set_id');
 __PACKAGE__->has_many(user_problems => 'DB::Schema::Result::UserProblem', 'user_set_id');
 
+# See https://metacpan.org/dist/DBIx-Class/view/lib/DBIx/Class/Manual/Cookbook.pod#Dynamic-Sub-classing-DBIx::Class-proxy-classes
 sub inflate_result {
 	my $self = shift;
 	my $ret  = $self->next::method(@_);

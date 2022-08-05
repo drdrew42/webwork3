@@ -4,7 +4,7 @@ use warnings;
 use strict;
 use feature 'signatures';
 use feature 'say';
-no warnings qw(experimental::signatures);
+no warnings qw/experimental::signatures/;
 
 use Try::Tiny;
 
