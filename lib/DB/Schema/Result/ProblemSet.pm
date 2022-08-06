@@ -176,6 +176,7 @@ sub validateOverrides ($set, $updates) {
 		$set->validate(field_name => $field_name);
 	}
 	$set->discard_changes;
+	return;
 }
 
 =head2 _stripUnchanged
@@ -202,6 +203,7 @@ sub _stripUnchanged ($set, $updates, $field_name) {
 			delete $updates->{$field_name}{$_} unless $is_truthy && $different;
 		}
 	}
+	return;
 }
 
 1;

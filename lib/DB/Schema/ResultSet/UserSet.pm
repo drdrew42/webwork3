@@ -271,8 +271,8 @@ sub getUserSet ($self, %args) {
 
 	DB::Exception::UserSetNotInCourse->throw(message => 'The set '
 			. $problem_set->set_name
-			. ' with set_version ' .
-			($args{info}{set_version} // 0)
+			. ' with set_version '
+			. ($args{info}{set_version} // 0)
 			. ' is not assigned to '
 			. $course_user->users->username
 			. ' in the course.')
@@ -373,14 +373,13 @@ update a single UserSet for a given course, user, and ProblemSet
 sub updateUserSet ($self, %args) {
 	my $user_set = $self->getUserSet(info => $args{info}, as_result_set => 1, skip_throw => 1);
 
-	DB::Exception::UserSetNotInCourse->throw(
-		message => 'The user '
+	DB::Exception::UserSetNotInCourse->throw(message => 'The user '
 			. $args{info}{username}
 			. ' is not assigned to the set '
 			. $args{info}{set_name}
 			. ' with set version '
-			. ($args{info}{set_version} // 0)
-	) unless defined($user_set);
+			. ($args{info}{set_version} // 0))
+		unless defined($user_set);
 
 	# Filter down to only the relevant keys.
 	my %filtered =

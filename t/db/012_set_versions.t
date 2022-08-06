@@ -155,7 +155,6 @@ $user_set1_v1_params->{set_version} = 1;
 my $user_set1_v1 = $user_set_rs->addUserSet(params => { %$user_set_info1, %$user_set1_v1_params });
 removeIDs($user_set1_v1);
 
-
 is_deeply($user_set1_v1_params, $user_set1_v1, "addUserSet: add a user set with version =1 ");
 
 # Make a new user set that has a  set_version of 2
