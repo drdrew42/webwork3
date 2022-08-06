@@ -156,7 +156,7 @@ throws_ok {
 		}
 	);
 }
-'DB::Exception::UndefinedParameter', 'addQuiz: try to add a quiz with a undefined parameter';
+'DB::Exception::InvalidField', 'addQuiz: try to add a quiz with a undefined parameter';
 
 # Try to add a quiz with a non-valid parameter.
 throws_ok {
@@ -193,7 +193,7 @@ throws_ok {
 		}
 	);
 }
-'DB::Exception::RequiredDateFields', 'addQuiz: try to add a quiz with a missing required date fields';
+'DB::Exception::FieldsNeeded', 'addQuiz: try to add a quiz with a missing required date fields';
 
 # Try to add a quiz with an undefined date field.
 throws_ok {
@@ -212,7 +212,7 @@ throws_ok {
 		}
 	);
 }
-'DB::Exception::InvalidDateField', 'addQuiz: try to add a quiz with an undefined date field';
+'DB::Exception::InvalidField', 'addQuiz: try to add a quiz with an undefined date field';
 
 # Try to add a quiz with dates that are out of order.
 throws_ok {
@@ -311,7 +311,7 @@ throws_ok {
 		}
 	);
 }
-'DB::Exception::UndefinedParameter', 'updateQuiz: try to update a quiz with an undefined parameter';
+'DB::Exception::InvalidField', 'updateQuiz: try to update a quiz with an undefined parameter';
 
 # Try to update a parameter with a bad value
 throws_ok {
@@ -343,7 +343,7 @@ throws_ok {
 		}
 	);
 }
-'DB::Exception::InvalidDateField', 'updateQuiz: try to update a quiz with a non-valid date';
+'DB::Exception::InvalidField', 'updateQuiz: try to update a quiz with a non-valid date';
 
 # Try to update a quiz with a date out of order.
 throws_ok {
