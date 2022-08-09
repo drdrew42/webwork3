@@ -8,17 +8,17 @@ no warnings qw/experimental::signatures/;
 use YAML::XS qw/LoadFile/;
 
 require Exporter;
-use base qw(Exporter);
+use base qw/Exporter/;
 our @EXPORT_OK = qw/checkSettings getDefaultCourseSettings getDefaultCourseValues
 	mergeCourseSettings validateSettingsConfFile validateCourseSettings
 	validateSingleCourseSetting validateSettingConfig
 	isInteger isTimeString isTimeDuration isDecimal/;
 
-use Exception::Class qw(
+use Exception::Class qw/
 	DB::Exception::UndefinedCourseField
 	DB::Exception::InvalidCourseField
 	DB::Exception::InvalidCourseFieldType
-);
+/;
 
 use WeBWorK3;
 
